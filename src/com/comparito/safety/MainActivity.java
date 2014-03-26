@@ -188,7 +188,7 @@ public class MainActivity extends Activity {
 					.newCameraPosition(cameraPosition));
 			googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 			googleMap.getUiSettings().setZoomGesturesEnabled(true);
-			//googleMap.setMyLocationEnabled(true);
+			googleMap.setMyLocationEnabled(true);
 
 		} catch (Exception e) {
 			e.printStackTrace();
