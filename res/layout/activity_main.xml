@@ -15,7 +15,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/autoCompleteTextView1"
         android:layout_marginTop="24dp"
         android:ems="10" />
 
@@ -25,8 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/autoCompleteTextView2"
         android:layout_alignBottom="@+id/autoCompleteTextView2"
-        android:layout_alignLeft="@+id/textView1"
-        android:text="Destination" />
+        android:text="@string/destination_lable" />
 
   <!--   <TextView
         android:id="@+id/textView1"
@@ -69,7 +67,7 @@
         android:layout_below="@+id/autoCompleteTextView2"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="17dp"
-        android:text="Set Route" />
+        android:text="@string/button1_label" />
 
     <Button
         android:id="@+id/button2"
@@ -79,6 +77,6 @@
         android:layout_alignBottom="@+id/button1"
         android:layout_alignRight="@+id/map"
         android:layout_marginRight="39dp"
-        android:text="SOS" />
+        android:text="@string/button2_lable" />
 
 </RelativeLayout>

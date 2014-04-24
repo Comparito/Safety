@@ -14,7 +14,6 @@ import android.util.Log;
 
 import com.comparito.safety.MainActivity;
 import com.comparito.safety.R;
-import com.comparito.safety.R.drawable;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 public class GcmIntentService extends IntentService {

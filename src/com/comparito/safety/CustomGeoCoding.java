@@ -21,71 +21,60 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class CustomGeoCoding extends AsyncTask<String, Void, LatLng> {
 
-	private double lat;
-	private double lng;
-	private LatLng latLng;
-   
+    private double lat;
+    private double lng;
+    private LatLng latLng;
 
-	@Override
-	protected LatLng doInBackground(String... youraddress) {
-		// output =
+    @Override
+    protected LatLng doInBackground(String... youraddress)
+	{
+	    String encAddress = "";
+	    try {
+		encAddress = java.net.URLEncoder.encode(youraddress[0], "utf8");
+	    }
+	    catch (UnsupportedEncodingException e1) {
+		e1.printStackTrace();
+	    }
 
-		String encAddress = "";
-		try {
-			encAddress = java.net.URLEncoder.encode(youraddress[0], "utf8");
-		} catch (UnsupportedEncodingException e1) {
-
-			e1.printStackTrace();
+	    String uriString = Constants.GEOCODE_API_BASE + Constants.OUT_JSON + "?address=" + encAddress + "&sensor=false&key=" + Constants.API_KEY;
+	    StringBuilder stringBuilder = null;
+	    try {
+		HttpGet httpGet = new HttpGet(uriString);
+		HttpClient client = new DefaultHttpClient();
+		HttpResponse response;
+		stringBuilder = new StringBuilder();
+		response = client.execute(httpGet);
+		HttpEntity entity = response.getEntity();
+		InputStream stream = entity.getContent();
+		int b;
+		while ((b = stream.read()) != -1) {
+		    stringBuilder.append((char) b);
 		}
 
-	    String uriString = "https://maps.google.com/maps/api/geocode/json?address="
- + encAddress + "&sensor=false&key=" + Constants.API_KEY;
+		JSONObject jsonObject = new JSONObject(stringBuilder.toString());
+		lng = ((JSONArray) jsonObject.get("results")).getJSONObject(0).getJSONObject("geometry").getJSONObject("location").getDouble("lng");
+		Log.e("longitude", Double.toString(lng));
+		lat = ((JSONArray) jsonObject.get("results")).getJSONObject(0).getJSONObject("geometry").getJSONObject("location").getDouble("lat");
+		Log.e("latitude", Double.toString(lat));
+		latLng = new LatLng(lat, lng);
 
-		StringBuilder stringBuilder = null;
-		try {
-			HttpGet httpGet = new HttpGet(uriString);
-			HttpClient client = new DefaultHttpClient();
-			HttpResponse response;
-			stringBuilder = new StringBuilder();
-
-			response = client.execute(httpGet);
-			HttpEntity entity = response.getEntity();
-			InputStream stream = entity.getContent();
-			int b;
-			while ((b = stream.read()) != -1) {
-				stringBuilder.append((char) b);
-			}
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		JSONObject jsonObject = new JSONObject();
-		try {
-			jsonObject = new JSONObject(stringBuilder.toString());
-
-			lng = ((JSONArray) jsonObject.get("results")).getJSONObject(0)
-					.getJSONObject("geometry").getJSONObject("location")
-					.getDouble("lng");
-
-			Log.e("longitude", Double.toString(lng));
-
-			lat = ((JSONArray) jsonObject.get("results")).getJSONObject(0)
-					.getJSONObject("geometry").getJSONObject("location")
-					.getDouble("lat");
-			Log.e("latitude", Double.toString(lat));
-			latLng = new LatLng(lat, lng);
-
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		return latLng;
+	    }
+	    catch (ClientProtocolException e) {
+		e.printStackTrace();
+	    }
+	    catch (IOException e) {
+		e.printStackTrace();
+	    }
+	    catch (JSONException e) {
+		e.printStackTrace();
+	    }
+	    return latLng;
 	}
 
-	@Override
-	protected void onPostExecute(LatLng result) {
-		super.onPostExecute(result);
+    @Override
+    protected void onPostExecute(LatLng result)
+	{
+	    super.onPostExecute(result);
 
 	}
 }

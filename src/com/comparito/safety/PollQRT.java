@@ -11,25 +11,26 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
-import com.comparito.safety.gcm.GcmIntentService;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.comparito.safety.gcm.GcmIntentService;
+
 public class PollQRT {
 
 
 
-    @SuppressWarnings("unchecked")
+   
     public void sendFirstCurrentLocation(Context context, Intent intent, final UserInformation userInformation, final GPSTracker gpsTracker)
 	{
 	    // Explicitly specify that GcmIntentService will handle the intent
 	    // Start the service, keeping the device awake while it is
 	    // launching.
 
-	    new AsyncTask() {
+	    new AsyncTask<Object, Object, Object>() {
+		@SuppressWarnings("static-access")
 		@Override
 		protected Object doInBackground(Object... params)
 		    {
@@ -86,14 +87,15 @@ public class PollQRT {
 
 	}
 
-    @SuppressWarnings("unchecked")
+   
     public void sendCurrentLocation(Context context, Intent intent, final UserInformation userInformation, final GPSTracker gpsTracker)
 	{
 	    // Explicitly specify that GcmIntentService will handle the intent
 	    // Start the service, keeping the device awake while it is
 	    // launching.
 
-	    new AsyncTask() {
+	    new AsyncTask<Object, Object, Object>() {
+		@SuppressWarnings("static-access")
 		@Override
 		protected Object doInBackground(Object... params)
 		    {
@@ -151,7 +153,7 @@ public class PollQRT {
 
 	}
 
-    @SuppressWarnings("rawtypes")
+    
     public void sendSOS(Context context, Intent intent, final UserInformation userInformation)
 	{
 	    // Explicitly specify that GcmIntentService will handle the intent.
@@ -159,7 +161,7 @@ public class PollQRT {
 	    // Start the service, keeping the device awake while it is
 	    // launching.
 
-	    new AsyncTask() {
+	    new AsyncTask<Object, Object, Object>() {
 		@Override
 		protected Object doInBackground(Object... params)
 		    {

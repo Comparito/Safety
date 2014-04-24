@@ -1,17 +1,15 @@
 package com.comparito.safety.gcm;
 
-import com.comparito.safety.MainActivity;
-import com.comparito.safety.R;
-import com.comparito.safety.ResultActivity;
-import com.comparito.safety.R.drawable;
-import com.comparito.safety.R.string;
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.WakefulBroadcastReceiver;
+
+import com.comparito.safety.MainActivity;
+import com.comparito.safety.R;
+import com.comparito.safety.ResultActivity;
 
 public class GcmBroadcastReceiver extends WakefulBroadcastReceiver {
     
